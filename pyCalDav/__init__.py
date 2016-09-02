@@ -75,13 +75,15 @@ class pyCalDav:
         return output
 
     def parseDateTime(self, iStr):
-        m_datetime=self.re_datetime.match(iStr[1])
+        val=str(iStr[1])
+        m_datetime=self.re_datetime.match(val)
         opts=iStr[0]
         tzid='UTC'
-        for opt in opts:
-            m_tzid=self.re_tzid.match(opt)
-            if m_tzid:
-                tzid=m_tzid.group(1)
+        if opts is not None:
+            for opt in opts:
+                m_tzid=self.re_tzid.match(opt)
+                if m_tzid:
+                    tzid=m_tzid.group(1)
         obj_dt=None
         if m_datetime:
             m_year=m_datetime.group(1)
